@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giỏ hàng - MT Racing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Oswald:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .cart-page {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .breadcrumb {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .breadcrumb a { color: #ccc; text-decoration: none; transition: color 0.3s; }
+    .breadcrumb a:hover { color: #ff3333; }
+
+    .cart-title {
+      font-size: 24px;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cart-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+
+    .cart-list {
+      background: #141414;
+      border: 1px solid #262626;
+      border-radius: 6px;
+      padding: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 15px 0;
+      border-bottom: 1px solid #222;
+    }
+    .cart-item:last-child { border-bottom: none; }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      background: #000;
+    }
+
+    .cart-item-info { flex: 1; }
+    .cart-item-info h4 { color: #fff; font-size: 15px; margin: 0 0 5px 0; }
+    .cart-item-info p { color: #888; font-size: 13px; margin: 0; }
+
+    .cart-item-price { color: #ff3333; font-weight: 700; font-size: 16px; }
+
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .cart-item-qty button {
+      background: #222;
+      color: #fff;
+      border: 1px solid #444;
+      width: 25px;
+      height: 25px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .cart-item-qty button:hover { background: #ff3333; border-color: #ff3333; }
+    .cart-item-qty span { color: #fff; font-size: 14px; min-width: 20px; text-align: center; }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #777;
+      cursor: pointer;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+    .remove-btn:hover { color: #ff3333; }
+
+    .cart-summary {
+      background: #141414;
+      border: 1px solid #262626;
+      border-radius: 6px;
+      padding: 25px;
+      height: fit-content;
+    }
+    .cart-summary h3 {
+      color: #fff;
+      font-size: 18px;
+      margin: 0 0 20px 0;
+      border-bottom: 1px solid #222;
+      padding-bottom: 10px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      color: #aaa;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    .summary-row.total {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      border-top: 1px solid #222;
+      padding-top: 15px;
+      margin-top: 15px;
+    }
+    .summary-row.total span:last-child { color: #ff3333; }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      background: #ff3333;
+      color: #fff;
+      text-align: center;
+      padding: 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 20px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .checkout-btn:hover { background: #e02828; transform: translateY(-2px); }
+
+    @media (max-width: 768px) {
+      .cart-container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body style="background: #0a0a0a; color: #fff; margin: 0;">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <!-- Bấm vào logo sẽ về Trang chủ -->
+      <a class="logo-link" href="index.html" aria-label="MT Racing trang chủ">
+        <img src="images/logo-mt.jpg" alt="MT Racing" style="height: 52px; width: auto; object-fit: contain; display: block;" />
+      </a>
+      <div class="header-actions">
+        <!-- Bấm vào chữ Tài khoản sẽ sang trang Đăng nhập -->
+        <a class="icon-btn" href="login.html" aria-label="Tài khoản">
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width: 24px; height: 24px; fill: currentColor;">
+            <path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12Zm0 2c-4.4 0-8 2.24-8 5v1.5h16V19c0-2.76-3.6-5-8-5Z" />
+          </svg>
+          <span>Tài khoản</span>
+        </a>
+        <!-- Bấm vào Giỏ hàng sẽ sang trang Giỏ hàng -->
+        <a class="icon-btn" href="cart.html" aria-label="Giỏ hàng" style="color: #ff3333;">
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width: 24px; height: 24px; fill: currentColor;">
+            <path d="M7 7V6a5 5 0 0 1 10 0v1h3l-1.6 12.2A2 2 0 0 1 16.42 21H7.58a2 2 0 0 1-1.98-1.8L4 7h3Zm2 0h6V6a3 3 0 0 0-6 0v1Z" />
+          </svg>
+          <span>Giỏ hàng</span>
+          <em class="badge" id="cart-count">0</em>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="cart-page">
+    <div class="breadcrumb">
+      <a href="index.html">Trang chủ</a> / Giỏ hàng của bạn
+    </div>
+
+    <h1 class="cart-title">Giỏ hàng thiết bị</h1>
+
+    <div class="cart-container">
+      <!-- DANH SÁCH SẢN PHẨM TRONG GIỎ -->
+      <div class="cart-list" id="cart-items-container">
+        <!-- Sản phẩm sẽ được render tự động bằng JS -->
+      </div>
+
+      <!-- BẢNG TỔNG KẾ ĐƠN HÀNG -->
+      <div class="cart-summary">
+        <h3>Cộng giỏ hàng</h3>
+        <div class="summary-row">
+          <span>Tạm tính</span>
+          <span id="summary-subtotal">0 đ</span>
+        </div>
+        <div class="summary-row">
+          <span>Vận chuyển</span>
+          <span>Miễn phí (Đơn > 490.000đ)</span>
+        </div>
+        <div class="summary-row total">
+          <span>Tổng cộng</span>
+          <span id="summary-total">0 đ</span>
+        </div>
+        
+        <!-- Nút đã được sửa để gọi đúng class màu đỏ và link qua trang checkout -->
+        <a href="checkout.html" class="checkout-btn">Tiến hành thanh toán</a>
+        
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const money = (n) => n.toLocaleString("vi-VN") + "đ";
+
+    function getCart() {
+      return JSON.parse(localStorage.getItem("mt_cart")) || [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem("mt_cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function updateQty(pn, delta) {
+      let cart = getCart();
+      const item = cart.find(i => i.pn === pn);
+      if (item) {
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+          cart = cart.filter(i => i.pn !== pn);
+        }
+      }
+      saveCart(cart);
+    }
+
+    function removeItem(pn) {
+      let cart = getCart();
+      cart = cart.filter(i => i.pn !== pn);
+      saveCart(cart);
+    }
+
+    function renderCart() {
+      const cart = getCart();
+      const container = document.getElementById("cart-items-container");
+      const badge = document.getElementById("cart-count");
+      const subtotalEl = document.getElementById("summary-subtotal");
+      const totalEl = document.getElementById("summary-total");
+
+      const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+      if (badge) badge.textContent = totalQty;
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p style="color: #888; text-align: center; padding: 30px;">Giỏ hàng của bạn đang trống.</p>';
+        subtotalEl.textContent = "0 đ";
+        totalEl.textContent = "0 đ";
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}" />
+          <div class="cart-item-info">
+            <h4>${item.name}</h4>
+            <p>Mã: ${item.pn}</p>
+            <div class="cart-item-qty">
+              <button type="button" onclick="updateQty('${item.pn}', -1)">-</button>
+              <span>${item.quantity}</span>
+              <button type="button" onclick="updateQty('${item.pn}', 1)">+</button>
+            </div>
+          </div>
+          <!-- Đã sửa lỗi JS ở đây -->
+          <div class="cart-item-price">${money(item.price * item.quantity)}</div>
+          <button class="remove-btn" onclick="removeItem('${item.pn}')" title="Xóa sản phẩm">×</button>
+        </div>
+      `).join('');
+
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      subtotalEl.textContent = money(subtotal);
+      totalEl.textContent = money(subtotal);
+    }
+
+    document.addEventListener("DOMContentLoaded", renderCart);
+  </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng ký tài khoản - MT Racing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Oswald:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Reset nhẹ cho trang đăng ký */
+    * { box-sizing: border-box; }
+    
+    .register-page {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    
+    .breadcrumb {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .breadcrumb a { color: #ccc; text-decoration: none; transition: color 0.3s; }
+    .breadcrumb a:hover { color: #ff3333; }
+    
+    .register-box {
+      background: #141414;
+      border: 1px solid #333;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    
+    .register-header {
+      background: #0a0a0a;
+      padding: 15px 30px;
+      border-bottom: 1px solid #ff3333; /* Điểm nhấn viền đỏ MT Racing */
+    }
+    .register-header h2 {
+      color: #fff;
+      font-size: 18px;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Bố cục Grid 2 cột chuyên nghiệp */
+    .register-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      padding: 40px 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #bbb;
+      font-size: 14px;
+    }
+    .form-group label span {
+      color: #ff3333; /* Dấu sao bắt buộc màu đỏ */
+    }
+    .form-group input {
+      width: 100%;
+      padding: 14px;
+      background: #000;
+      border: 1px solid #333;
+      border-radius: 4px;
+      color: #fff;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #ff3333;
+      background: #111;
+    }
+    
+    /* Thanh hiển thị độ mạnh mật khẩu (giao diện mẫu) */
+    .password-strength {
+      height: 4px;
+      background: #333;
+      margin-top: 10px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .strength-bar {
+      height: 100%;
+      width: 30%; /* Giả lập đang gõ mật khẩu yếu */
+      background: #ffaa00; 
+      transition: width 0.3s;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: #aaa;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .checkbox-group input {
+      margin-top: 3px;
+      accent-color: #ff3333;
+    }
+    
+    .submit-btn {
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 14px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-top: 20px;
+      transition: all 0.3s;
+    }
+    .submit-btn:hover {
+      background: #ff3333;
+      transform: translateY(-2px);
+    }
+    
+    .social-login {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+    }
+    .social-login p {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    .social-btns {
+      display: flex;
+      gap: 15px;
+    }
+    .btn-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: opacity 0.3s;
+    }
+    .btn-social:hover { opacity: 0.8; }
+    .btn-fb { background: #1877f2; }
+    .btn-gg { background: #ea4335; }
+    
+    .footer-policy {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .footer-policy a {
+      color: #ff3333;
+      text-decoration: none;
+    }
+    
+    /* Responsive: Tự động gom thành 1 cột trên điện thoại */
+    @media (max-width: 768px) {
+      .register-form {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .col-right {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER GIỮ NGUYÊN NHƯ TRANG CHỦ -->
+  <header class="site-header">
+    <div class="header-inner">
+<!-- Gắn Logo hình ảnh màu đỏ mới cho web -->
+<a class="logo-link" href="index.html" aria-label="MT Racing trang chủ">
+    <img src="images/logo-mt.jpg" alt="MT Racing" class="logo-img" />
+  </a>
+      <div class="header-actions">
+        <a class="icon-btn" href="register.html" aria-label="Tài khoản">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12Zm0 2c-4.4 0-8 2.24-8 5v1.5h16V19c0-2.76-3.6-5-8-5Z" />
+          </svg>
+          <span>Tài khoản</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="register-page">
+    <div class="breadcrumb">
+      <a href="index.html">Trang chủ</a> / Đăng ký tài khoản
+    </div>
+    
+    <div class="register-box">
+      <div class="register-header">
+        <h2>Tạo tài khoản cho cá nhân</h2>
+      </div>
+      
+      <form class="register-form" action="#">
+        <!-- CỘT TRÁI: THÔNG TIN CÁ NHÂN -->
+        <div class="col-left">
+          <div class="form-group">
+            <label>Tên <span>*</span></label>
+            <input type="text" placeholder="..." required />
+          </div>
+          <div class="form-group">
+            <label>Họ <span>*</span></label>
+            <input type="text" placeholder="..." required />
+          </div>
+          <div class="form-group">
+            <label>Email <span>*</span></label>
+            <input type="email" placeholder="..." required />
+          </div>
+          <div class="form-group">
+            <label>Số điện thoại</label>
+            <input type="tel" placeholder="..." />
+          </div>
+          <div class="form-group">
+            <label>Địa chỉ <span>*</span></label>
+            <input type="text" placeholder="..." required />
+          </div>
+        </div>
+        
+        <!-- CỘT PHẢI: BẢO MẬT & ĐĂNG NHẬP -->
+        <div class="col-right">
+          <div class="form-group">
+            <label>Password <span>*</span></label>
+            <input type="password" placeholder="Nhập mật khẩu (5-15 ký tự)" required />
+            <label style="margin-top: 15px;">Password Strength</label>
+            <div class="password-strength">
+              <div class="strength-bar"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Confirm Password <span>*</span></label>
+            <input type="password" placeholder="Nhập lại mật khẩu" required />
+          </div>
+          
+          <label class="checkbox-group">
+            <input type="checkbox" />
+            <span>Remember me</span>
+          </label>
+          <label class="checkbox-group">
+            <input type="checkbox" checked />
+            <span>Đăng ký để nhận Bản tin từ MT Racing</span>
+          </label>
+          
+          <button type="submit" class="submit-btn">Tạo tài khoản</button>
+          
+          <div class="social-login">
+            <p>Hoặc đăng nhập qua</p>
+            <div class="social-btns">
+              <button type="button" class="btn-social btn-fb">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/></svg>
+                Facebook
+              </button>
+              <button type="button" class="btn-social btn-gg">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+                Google
+              </button>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 20px; font-size: 14px; color: #aaa;">
+          Đã có tài khoản? <a href="login.html" style="color: #ff3333; font-weight: bold; text-decoration: none;">Đăng nhập tại đây</a>
+        </div>
+      </form>
+    </div>
+    
+    <div class="footer-policy">
+      <a href="#">Quyền lợi đăng kí tài khoản cá nhân tại website của MT Racing »</a>
+    </div>
+  </main>
+</body>
+</html>
